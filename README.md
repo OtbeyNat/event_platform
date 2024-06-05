@@ -13,6 +13,7 @@ lib/database/models
 webhook - event triggers
 https://clerk.com/docs/integrations/webhooks/sync-data
 - deploy application and add deployed webhook/endpoint on clerk
+- once deployed on vercel and added endpoint on clerk, copy the signing secret to .env.local
 - DONT BOTHER DOING NGROK
 npm install svix
 - app/api/webhooks/route.ts -> new user -> lib/actions/user.actions.ts
