@@ -1,6 +1,7 @@
 import Collection from '@/components/shared/Collection'
 import { Button } from '@/components/ui/button'
 import { getEventsByUser } from '@/lib/actions/event.actions'
+import { getOrdersByUser } from '@/lib/actions/order.actions'
 import { getUserById } from '@/lib/actions/user.actions'
 // import { getOrdersByUser } from '@/lib/actions/order.actions'
 import { IOrder } from '@/lib/database/models/order.model'
@@ -18,15 +19,23 @@ const ProfilePage = async ({ params: {id}, searchParams }: SearchParamProps) => 
     // console.log(userId);
     const profileId = id === 'self' ? userId : id;
     // console.log(profileId);
-    const ordersPage = Number(searchParams?.ordersPage) || 1;
     const eventsPage = Number(searchParams?.eventsPage) || 1;
     const organizedEvents = await getEventsByUser({ userId: profileId, page: eventsPage });
 
     const profileInfo = await getUserById(profileId);
     // console.log(profileInfo)
-    // const orders = await getOrdersByUser({ userId, page: ordersPage})
-
-    // const orderedEvents = orders?.data.map((order: IOrder) => order.event) || [];
+    
+    let orders
+    let orderedEvents
+    let ordersPage = 1
+    if (id === 'self') {
+        // console.log(userId)
+        ordersPage = Number(searchParams?.ordersPage) || 1;
+        orders = await getOrdersByUser({ userId, page: ordersPage})
+        orderedEvents = orders?.data.map((order: IOrder) => order.event) || [];
+        // console.log(orderedEvents)
+    }
+        
 
     return (
     <>
@@ -50,7 +59,7 @@ const ProfilePage = async ({ params: {id}, searchParams }: SearchParamProps) => 
             </div>
         </section>
 
-        {/* {id ==='self' && <section className="wrapper my-8">
+        {id ==='self' && <section className="wrapper my-8">
             <Collection 
             data={orderedEvents}
             emptyTitle="No event tickets"
@@ -61,7 +70,7 @@ const ProfilePage = async ({ params: {id}, searchParams }: SearchParamProps) => 
             urlParamName="ordersPage"
             totalPages={orders?.totalPages}
             />
-        </section>} */}
+        </section>}
 
         {/* Events Organized */}
         <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">

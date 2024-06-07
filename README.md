@@ -1,3 +1,6 @@
+YOUTUBE TUTORIAL REFERENCE
+https://www.youtube.com/watch?v=zgGhzuBZOQg&t=17806s
+
 npx shadcn-ui@latest init
 npm install uploadthing @uploadthing/react
 npm install @clerk/nextjs
@@ -141,10 +144,17 @@ order.actions.ts
 
 https://dashboard.stripe.com/test/webhooks
 - add endpoint
-"APP_URL" + /api/webhook/stripe
+"APP_URL" + /api/webhook/stripe ==> THIS HAS TO BE THE EXACT ROUTE FOR THE PROJECT FILE STRUCTURE IN ORDER TO WORK
 /api/webook/stripe/route.ts
 - event: checkout.session.completed
 after end endpoint get webhook secret
 - STRIPE_WEBHOOK_SECRET= from the stripe dashboard - webhook section
 
 https://vercel.com/guides/getting-started-with-nextjs-typescript-stripe
+
+
+ADDITIONAL FEATURES:
+- visit other user's profile (and their specific events)
+- add email to order
+- add quantity to order (multiple tickets at a time)
+- display number of tickets owned for event

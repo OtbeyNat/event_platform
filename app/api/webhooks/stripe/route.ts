@@ -5,7 +5,6 @@ import { createOrder } from '@/lib/actions/order.actions'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function POST(req: NextRequest) {
-    console.log("HI")
     const body = await req.text()
     const sig = req.headers.get("Stripe-Signature") as string
 
