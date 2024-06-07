@@ -1,17 +1,22 @@
-import stripe from 'stripe'
-import { NextResponse } from 'next/server'
+import Stripe from 'stripe'
+import { NextRequest, NextResponse } from 'next/server'
 import { createOrder } from '@/lib/actions/order.actions'
 
-export async function POST(request: Request) {
-    const body = await request.text()
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-    const sig = request.headers.get('stripe-signature') as string
+export async function POST(req: NextRequest) {
+    const body = await req.text()
+    const sig = req.headers.get("Stripe-Signature") as string
+
     const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!
 
     let event
 
     try {
         event = stripe.webhooks.constructEvent(body, sig, endpointSecret)
+        
+        console.log("event",event.type)
+
     } catch (err) {
         return NextResponse.json({ message: 'Webhook error', error: err })
     }

@@ -141,9 +141,10 @@ order.actions.ts
 
 https://dashboard.stripe.com/test/webhooks
 - add endpoint
-"APP_URL" + /api/webook/stripe
+"APP_URL" + /api/webhook/stripe
 /api/webook/stripe/route.ts
 - event: checkout.session.completed
 after end endpoint get webhook secret
-- STRIPE_WEBHOOK_SECRET=
+- STRIPE_WEBHOOK_SECRET= from the stripe dashboard - webhook section
 
+https://vercel.com/guides/getting-started-with-nextjs-typescript-stripe
