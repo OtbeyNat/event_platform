@@ -64,7 +64,11 @@ events.actions.ts
 - create,update,delete,get events, get by category, get by user
 
 get clerk userid via
+1)
+const { user } = useUser();
+const userId = user?.publicMetadata.userId as string;
 
+2)
 const { sessionClaims } = auth();
 const userId = sessionClaims?.userId?.userId
 
@@ -100,9 +104,46 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'utfs.io',
                 port: ''
-            }
+            },
+            {
+                protocol: 'https',
+                hostname: 'img.clerk.com',
+                port: ''
+            },
         ]
     }
 };
+export default nextConfig;
+
 
 export default nextConfig;
+
+
+BUGS:
+POTENTIAL BUG USING UNDERSCORES FOR USERNAME WHEN MAKING NEW USER
+
+
+PAYMENTS
+https://dashboard.stripe.com/test/dashboard
+https://docs.stripe.com/checkout/quickstart?client=next
+npm install --save stripe @stripe/stripe-js next
+
+https://dashboard.stripe.com/apikeys
+update env variables
+https://stripe.com/docs/webhooks#verify-events
+setup stripe webhook secret
+
+order.actions.ts
+- checkout order
+- create order
+- get order by event
+- get order by user
+
+https://dashboard.stripe.com/test/webhooks
+- add endpoint
+"APP_URL" + /api/webook/stripe
+/api/webook/stripe/route.ts
+- event: checkout.session.completed
+after end endpoint get webhook secret
+- STRIPE_WEBHOOK_SECRET=
+

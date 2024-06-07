@@ -4,6 +4,7 @@ import { getEventById, getRelatedEventsByCategory } from '@/lib/actions/event.ac
 import { formatDateTime } from '@/lib/utils';
 import { SearchParamProps } from '@/types'
 import Image from 'next/image';
+import Link from 'next/link';
 
 const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
     const event = await getEventById(id);
@@ -35,7 +36,11 @@ const EventDetails = async ({ params: { id }, searchParams }: SearchParamProps) 
                                 </div>
                                 <p className="p-medium-18 ml-2 mt-2 sm:mt-0">
                                     by{' '}
-                                    <span className="text-primary-500">{event.organizer.firstName} {event.organizer.lastName}</span>
+                                    <Link
+                                    href={`/profile/${event.organizer._id}`}
+                                    >
+                                        <span className="text-primary-500">{event.organizer.firstName} {event.organizer.lastName}</span>
+                                    </Link>
                                 </p>
                             </div>
                         </div>
