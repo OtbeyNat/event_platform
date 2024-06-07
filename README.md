@@ -155,6 +155,11 @@ https://vercel.com/guides/getting-started-with-nextjs-typescript-stripe
 
 ADDITIONAL FEATURES:
 - visit other user's profile (and their specific events)
+
 - add email to order
 - add quantity to order (multiple tickets at a time)
 - display number of tickets owned for event
+- delete events?
+    - remove all orders with the event id
+    - remove event
+- location link to google maps?
