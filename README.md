@@ -162,4 +162,7 @@ ADDITIONAL FEATURES:
 - delete events?
     - remove all orders with the event id
     - remove event
-- location link to google maps?
+- better location logic?
+- better ticket logic?
+    - group events together (number the amount of tickets)
+    - display the past/current events & tickets
